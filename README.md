@@ -1,5 +1,7 @@
 # SRE-Interview-Prep
-SRE Interview Preparation (K8s and OpenShift)
+SRE Interview Preparation 
+
+K8s and OpenShift Related Questions - 
 
 Q1 - Explain Lifetime of a Pod or container.
 
