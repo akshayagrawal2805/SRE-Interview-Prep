@@ -1,0 +1,12 @@
+Scenario Questions - 
+
+
+Q1 - Apps team checked and deployed an image on QA env. It was working fine but when done in production, some microservices were not working. How you will deal with the scenario as an SRE and fix it.
+
+Answer - If the application works correctly in QA but fails in Production after deploying the same image, my first assumption is that the image itself may not be the problem. I would compare the Production environment with QA and investigate systematically before taking any action.
+
+Step-1 Assessing the Impact of this incident - 
+
+a. Need to understand the incident if this is a Sev1 or Sev2
+b. Which microservices are affected.
+c. 
