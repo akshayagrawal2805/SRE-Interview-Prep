@@ -69,3 +69,33 @@ Q7. You have deployed an application for the first time, how you will define SLO
 Answer - For a newly deployed application, I would first identify the critical user expectations and define SLIs such as availability, latency, and error rate. Since there is no production history, I would start with reasonable industry-standard SLOs—for example, 99.9% availability, P95 latency under 300–500 ms, and an error rate below 0.1–0.5%. I would ensure the application is instrumented with monitoring and observability tools, collect production data over the first few weeks, and then refine the SLOs based on actual user behavior and business requirements. I would also establish an error budget to balance reliability with the pace of feature delivery.
 
 Q8. How will you make your web app more secure?
+
+Answer - Securing a web application should start with, 'What could go wrong, and how can we prevent it?'. 
+
+a. make sure all communication happens over HTTPS so data is encrypted.
+b. make sure users only have access to what they actually need using role-based permissions.
+c. make sure secrets like database passwords or API keys are never stored in the code—they should come from a secure secrets manager tool like hashicorp vault
+d. enable logging and monitoring so we can quickly detect unusual activity, and keep the servers and dependencies updated with security patches.
+e. Finally, I'd include security checks in the CI/CD pipeline, such as vulnerability scans, so we can catch issues before the application reaches production.
+
+Q9. What steps will you take to make your docker image more secure?
+
+Answer - To make my docker image more secure - 
+
+a. try to use trusted and lightweight base image, because the fewer packages we have, the smaller the attack surface.
+b. avoid running the application as the root user. Instead, I create a non-root user inside the container so that even if someone manages to compromise it, they won't have full privileges.
+c. Never store secrets in the image.
+d. Remove unnecessary packages using multi-stage builds.
+e. Scan the image for vulnerabilities (e.g., Trivy).
+f. Keep the image and dependencies updated.
+
+Q10. What is timeout, retry, cascading effect for application resilience, and how it can be solved.
+
+Answer - "Application resilience is about making sure an application continues to work even when some components fail. Three common concepts are timeouts, retries, and the cascading effect."
+
+Easy way to remember
+Timeout → "Don't wait forever."
+Retry → "Try again, but don't overwhelm the service."
+Cascading Failure → "One failing service shouldn't bring down the entire application."
+Solution → Timeout + Controlled Retry + Circuit Breaker + Monitoring + Autoscaling + Graceful Degradation.
+
