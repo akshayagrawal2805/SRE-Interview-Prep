@@ -5,8 +5,65 @@ Q1 - Apps team checked and deployed an image on QA env. It was working fine but 
 
 Answer - If the application works correctly in QA but fails in Production after deploying the same image, my first assumption is that the image itself may not be the problem. I would compare the Production environment with QA and investigate systematically before taking any action.
 
-Step-1 Assessing the Impact of this incident - 
+Assessing the Impact of this incident - 
 
 a. Need to understand the incident if this is a Sev1 or Sev2
-b. Which microservices are affected.
-c. 
+
+b. Are users seeing errors like 500, 503, timeout, or connection refused?
+
+c. Which microservices are affected.
+
+d. Check relevant deployment, Pods, Services etc.
+
+e. work on restoring the application.
+
+f. After recovery need to work on Root cause Analysis.
+
+Q2 - If you receive a P1 issue, what will be your response as an SRE. give sequential answer
+
+Answer - "When I receive a P1 incident, my first priority is to acknowledge the alert, join the incident bridge, and understand the business impact. I check monitoring dashboards to identify symptoms such as high error rates, latency, or resource exhaustion. Then I verify the Kubernetes/OpenShift cluster health by checking nodes, pods, events, and application logs. I investigate recent deployments or configuration changes and validate dependencies like databases, messaging systems, or external APIs. If the issue is due to a recent deployment or configuration change, I restore service as quickly as possible by rolling back or applying the appropriate fix. Once the service is restored, I validate application health through monitoring and smoke tests, continue monitoring for stability, communicate regular updates to stakeholders, and finally perform a detailed RCA with preventive actions to reduce the likelihood of similar incidents."
+
+This sequence reflects how experienced SREs operate during critical incidents: acknowledge → assess impact → investigate → restore service → validate → communicate → document and improve.
+
+Q3. Tell me what happens when a user tries to access apache server hoster on private subnet in AWS
+
+Answer - The answer depends on how the Apache server in the private subnet is exposed. The most common architecture is:
+
+User (Internet)
+      │
+      ▼
+Route53 (Optional DNS)
+      │
+      ▼
+Internet Gateway (IGW)
+      │
+      ▼
+Public Application Load Balancer (ALB)
+      │
+      ▼
+Target Group
+      │
+      ▼
+Apache Server (EC2) in Private Subnet
+
+"When a user accesses a website hosted on an Apache server in a private subnet, the browser first resolves the domain name using DNS, typically through Route 53, which returns the DNS name of a public Application Load Balancer. The user's HTTPS request reaches the ALB through the Internet Gateway. The ALB terminates SSL if configured, evaluates its listener rules, and forwards the request to a healthy Apache instance in the target group. The Apache EC2 instance resides in a private subnet and has no public IP, so it cannot be accessed directly from the internet. Its security group only allows traffic from the ALB's security group. Apache processes the request and sends the response back through the ALB to the client. If the Apache server itself needs outbound internet access, such as to download updates or call external services, it uses a NAT Gateway in a public subnet, while remaining inaccessible from the internet."
+
+Q4. There is an application running in a service, and other outside the service, but both are on same port. When a user tries to access them will there be port clashing?
+
+Answer - "No, using the same port does not automatically cause a port clash. A network endpoint is identified by the combination of IP address and port. If two applications are running on different hosts, different pods, or behind different Kubernetes Services, they can both use the same port because their IP addresses are different. A port clash only occurs when two processes try to bind to the same IP address and the same port on the same machine. In Kubernetes, each pod has its own IP, so multiple pods can safely listen on the same container port, and Services route traffic to those pods without causing conflicts."
+
+Q5. A deployment with 4 replicas is taking too long to come up, causing a production outage. As an SRE, what actions would you take to minimize the outage?
+
+Answer - As a SRE I would restore service first, investigate systematically, communicate, and implement preventive improvements.
+
+Further details - 
+
+I would check the rollout status, deployment strategy, and pod health to determine why the replicas are not becoming ready. I would review pod logs, events, readiness probes, and check for issues like image pull failures, configuration errors, resource constraints, or dependency failures. If the issue cannot be resolved quickly and production is impacted, I would roll back to the previous stable version or pause the rollout to prevent further disruption. I would also verify cluster health to ensure there are no node or scheduling issues. Once the service is restored, I would validate that all replicas are healthy, monitor the application for stability, and perform a root cause analysis.
+
+Q6. If your application is trying to communicate with other apps and it is not able to then what will happen
+
+Answer - "If my application cannot communicate with another application it depends on, the request may timeout, fail with a connection refused error, or return HTTP errors like 503 or 504. Users may experience slow responses or complete failure of certain features. As an SRE, I would first verify that the dependent service and its pods are running and healthy. Then I'd check the Service and Endpoints to ensure traffic is being routed correctly. Next, I'd review application logs for connection or DNS errors, test connectivity from within the source pod using tools like curl or nslookup, and verify NetworkPolicies, service ports, and readiness probes. Once I identify the root cause, I'd restore connectivity, monitor the application for recovery, and document the incident with preventive actions."
+
+Q7. 
+
+Answer -
