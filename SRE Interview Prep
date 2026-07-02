@@ -64,6 +64,8 @@ Q6. If your application is trying to communicate with other apps and it is not a
 
 Answer - "If my application cannot communicate with another application it depends on, the request may timeout, fail with a connection refused error, or return HTTP errors like 503 or 504. Users may experience slow responses or complete failure of certain features. As an SRE, I would first verify that the dependent service and its pods are running and healthy. Then I'd check the Service and Endpoints to ensure traffic is being routed correctly. Next, I'd review application logs for connection or DNS errors, test connectivity from within the source pod using tools like curl or nslookup, and verify NetworkPolicies, service ports, and readiness probes. Once I identify the root cause, I'd restore connectivity, monitor the application for recovery, and document the incident with preventive actions."
 
-Q7. 
+Q7. You have deployed an application for the first time, how you will define SLOs for them
 
-Answer -
+Answer - For a newly deployed application, I would first identify the critical user expectations and define SLIs such as availability, latency, and error rate. Since there is no production history, I would start with reasonable industry-standard SLOs—for example, 99.9% availability, P95 latency under 300–500 ms, and an error rate below 0.1–0.5%. I would ensure the application is instrumented with monitoring and observability tools, collect production data over the first few weeks, and then refine the SLOs based on actual user behavior and business requirements. I would also establish an error budget to balance reliability with the pace of feature delivery.
+
+Q8. How will you make your web app more secure?
