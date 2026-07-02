@@ -136,4 +136,6 @@ Answer - Pod Affinity: Decides whether a Pod should be placed near another Pod.
 
 Pod Anti-Affinity: Ensures Pods are not scheduled together.
 
-Q22 - 
+Q22 - How can I make my pods to communicate with other pods in the cluster, without Network policies
+
+Answer - By default, Kubernetes allows all pods to communicate with each other across namespaces unless Network Policies (NP) are implemented to restrict traffic. Pods communicate using Kubernetes Services or directly using Pod IPs (though Services are recommended).
