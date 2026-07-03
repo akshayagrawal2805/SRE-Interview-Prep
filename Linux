@@ -20,3 +20,13 @@ Answer: LVM -> Logical Volume Manager.
 It is a storage management system in linux, which gives flexibility to manage the storage.
 Basically, disk partitions have a fixed size and are difficult to resize. Here, LVM creates logical volumes, which is easy to increase or decrease whenever we need more or less disk space.
 
+Q4. How to run a process in background in Linux.?
+
+Answer: To start the process in background directly, I use '&' at the end of the command. (command &)
+To move the already running process to the background, I will do Ctrl + Z (to suspend the running process) and use "bg" command to resume the process in the background.
+Check the background jobs using "jobs" command.
+To bring the job back to foreground, i use "fg" command
+
+Q5. How increase size of a file system in linux system.? Give command
+
+Answer: 
