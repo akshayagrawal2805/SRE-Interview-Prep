@@ -99,3 +99,40 @@ Retry → "Try again, but don't overwhelm the service."
 Cascading Failure → "One failing service shouldn't bring down the entire application."
 Solution → Timeout + Controlled Retry + Circuit Breaker + Monitoring + Autoscaling + Graceful Degradation.
 
+Q11. Explain SRE Principles.
+
+Answer - From my understanding, SRE (Site Reliability Engineering) is about balancing reliability with the speed of delivering new features. The idea is to build systems that are reliable, automate repetitive work, and use data to make decisions instead of guesswork.
+
+The main SRE principles are:
+
+1. Define Reliability with SLOs - The first principle is to define what reliability actually means. Instead of saying 'the application should never go down,' we define measurable targets using SLOs, like 99.9% availability or 95% of requests completing within 300 milliseconds.
+
+2. Manage Error Budgets - An error budget is the amount of acceptable failure based on the SLO. For example, if the SLO is 99.9% availability, a small amount of downtime is acceptable.
+
+3. Automate Repetitive Tasks - SREs try to eliminate manual, repetitive work by automating it. Things like deployments, infrastructure provisioning, backups, monitoring setup, and incident response should be automated as much as possible.
+
+4. Monitoring and Observability - You can't improve what you can't measure. That's why monitoring and observability are key principles. We collect metrics, logs, and traces so we can quickly detect issues, identify the root cause, and understand how the application is performing
+
+5. Incident Response and Learning - Incidents will happen, so the goal is to respond quickly, restore the service, and then learn from what happened. After major incidents, teams conduct a blameless postmortem to identify improvements without focusing on individual mistakes
+
+6. Reduce Toil - Toil refers to repetitive manual work that doesn't add long-term value, like repeatedly restarting services or manually deploying applications. SRE aims to reduce this by automating those tasks.
+
+7. Design for Resilience - Applications should be able to handle failures gracefully. That means using timeouts, retries, circuit breakers, load balancing, redundancy, and autoscaling so that a failure in one component doesn't bring down the entire system.
+
+Q12. What is SLI, SLO and SLA?
+
+Answer - 
+SLI(Service Level Indicator) = What we measure.
+SLO(Service Level Objective) = The target we want to achieve.
+SLA(Service Level Agreement) = The promise we make to the customer.
+
+Simple Example (Easy to Remember)
+
+Imagine you're running an online shopping website.
+
+Term	Example
+SLI	Measure how many checkout requests succeed and how fast they complete.
+SLO	99.9% of checkouts should succeed, and 95% should complete within 2 seconds.
+SLA	Promise customers 99.9% uptime per month. If it's lower, they receive service credits.
+
+Q13. 
