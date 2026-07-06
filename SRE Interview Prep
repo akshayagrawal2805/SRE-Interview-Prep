@@ -160,3 +160,22 @@ e. Regular vulnerability scanning, patch management, and security updates are pe
 f. in CI/CD pipelines we integrate security scans for code, dependencies, and container images before deployment
 
 Q15. Explain the CI/CD flow of your project?
+
+Answer - Direct Deployments - 
+In my current project, the CI/CD pipeline is managed using GitHub Actions. The DevOps team creates the GitHub Actions workflow file, which gets triggered whenever there's a push or pull request to specific branches like main, develop, or feature branches, depending on the environment and deployment strategy.
+
+The workflow file mainly has three parts. First is the trigger section, where we define when the pipeline should start. Second is the runs-on section, where we specify which runner will execute the workflow, such as ubuntu-latest or a self-hosted runner. Third is the jobs section, where we define the different stages of the pipeline like checkout, build, SonarQube scan, security scans, Docker image build, image push to Harbor, and deployment to OpenShift.
+
+Deployments via GitOps using Argo CD
+
+In our project, Argo CD is used for deployments to the OpenShift cluster. Unlike a traditional CI/CD pipeline where GitHub Actions or Jenkins deploys the application directly, our pipeline only builds the application, performs the required quality and security checks, builds the Docker image, and pushes it to the image registry.
+
+After that, the pipeline updates the Kubernetes/OpenShift deployment manifest with the new image version and commits the change to a separate Git repository, which we call the GitOps repository.
+
+Argo CD continuously monitors this GitOps repository. Whenever it detects a change in the deployment manifests, it automatically synchronizes those changes to the OpenShift cluster.
+
+Argo CD also continuously compares the desired state in Git with the actual state in the cluster. If someone makes a manual change directly in OpenShift, Argo CD detects that the application is out of sync and, depending on the configuration, either notifies the team or automatically restores the cluster to match what's defined in Git.
+
+This approach makes deployments more reliable because Git becomes the single source of truth, every deployment is tracked through Git commits, and rolling back is as simple as reverting a commit in the GitOps repository.
+
+
