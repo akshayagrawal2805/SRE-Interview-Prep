@@ -135,4 +135,28 @@ SLI	Measure how many checkout requests succeed and how fast they complete.
 SLO	99.9% of checkouts should succeed, and 95% should complete within 2 seconds.
 SLA	Promise customers 99.9% uptime per month. If it's lower, they receive service credits.
 
-Q13. 
+Q13. What is latency and throughput?
+
+Answer - Latency and throughput are two important performance metrics in computing, networking, and distributed systems.
+Latency is the time it takes for a single request or operation to complete.
+
+Measured in units of time (milliseconds, seconds, etc.).
+Lower latency is usually better.
+
+Throughput is the amount of work completed in a given period of time.
+
+Measured in requests per second (RPS), transactions per second (TPS), MB/s, etc.
+Higher throughput is usually better.
+
+Q14. What security mechanism do you implement in your environment.
+
+Answer - In my environment, we implement multiple layers of security.
+
+a. RBAC so that the users only have required permissions.
+b. Sensitive information such as passwords, API keys, and certificates is stored securely using a secrets management solution
+c. communication is encrypted using HTTPS/TLS, and data at rest is encrypted where supported.
+d. Network security is enforced through firewalls, security groups, and network segmentation to restrict access.
+e. Regular vulnerability scanning, patch management, and security updates are performed to keep systems protected
+f. in CI/CD pipelines we integrate security scans for code, dependencies, and container images before deployment
+
+Q15. Explain the CI/CD flow of your project?
