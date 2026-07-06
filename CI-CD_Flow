@@ -1,0 +1,17 @@
+CICD Flow using GitHub Actions + OpenShift for Interviews - 
+
+Step 1: Developer Development
+
+A developer creates a feature branch from develop.
+The developer implements a new Login API and performs local testing.
+
+After verifying the changes:
+
+git add .
+git commit
+git push
+
+The code is pushed to GitHub.
+
+
+
