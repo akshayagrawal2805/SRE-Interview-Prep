@@ -29,4 +29,41 @@ To bring the job back to foreground, i use "fg" command
 
 Q5. How increase size of a file system in linux system.? Give command
 
+Answer: There are two type of filesystems in Linux(ubuntu and debian) - a. ext4 (Fourth Extended FileSystem) and b. XFS
+XFS is designed for large files and enterprise workloads. And it is default filesystem in RHEL and therefore in Openshift also we have XFS.
+
+To determine which filesystem we are using we can run - "df -Th"
+And to increase the size of this XFS filesystem first extend the logical volume "lvextend -L 10G /"we can use "xfs_growfs /mountpoint"
+
+Incase of ext4 filesystem to increase that we need to increase the Logical volume first and then resize the fs with below commands - 
+lvextend -L +10G /
+resize2fs /
+
+Note > why XFS is better than ext4 - XFS is designed for large files and enterprise workloads, Scales well, Excellent for DBs and mainly used in enterprise environments.
+
+Q6. What is SELinux and its Policies.
+
+Answer: SELinux stands for Security-Enhanced Linux. It's an additional security layer that controls what applications and users are allowed to access, even if standard Linux file permissions allow it. I usually explain it as a security guard inside a building—having a key card gets you into the building, but the guard still checks whether you're allowed into a specific room. SELinux has three modes: Enforcing, which blocks unauthorized actions; Permissive, which only logs violations; and Disabled, where SELinux is turned off. It uses policies, such as the Targeted policy, to define what each application is permitted to access, helping limit the impact of security incidents
+
+Q7. Common commands used in Linux?
+
+Answer:  User Management
+useradd username - Create user.
+passwd username - Change password.
+usermod - Modify user.
+userdel username - Delete user.
+groups username - Show user groups.
+groupadd groupname - Create group.
+
+Process Management
+
+
+Q8. How to kill a process in Linux?
+
 Answer: 
+
+Q9. What is inode?
+
+Answer:
+
+Q10. 
