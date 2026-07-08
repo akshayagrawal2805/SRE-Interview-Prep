@@ -178,4 +178,13 @@ Argo CD also continuously compares the desired state in Git with the actual stat
 
 This approach makes deployments more reliable because Git becomes the single source of truth, every deployment is tracked through Git commits, and rolling back is as simple as reverting a commit in the GitOps repository.
 
+Q16. Different error codes and what they signifies?
 
+Answer - HTTP status codes are grouped into 5 categories.
+
+Status Code Range	  Meaning
+1xx	              Informational
+2xx	              Success
+3xx	              Redirection
+4xx	              Client Error (problem with the request)
+5xx	              Server Error (problem on the server)
