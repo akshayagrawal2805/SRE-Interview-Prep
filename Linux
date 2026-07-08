@@ -47,7 +47,9 @@ Answer: SELinux stands for Security-Enhanced Linux. It's an additional security 
 
 Q7. Common commands used in Linux?
 
-Answer:  User Management
+Answer:  
+User Management - 
+
 useradd username - Create user.
 passwd username - Change password.
 usermod - Modify user.
@@ -55,15 +57,110 @@ userdel username - Delete user.
 groups username - Show user groups.
 groupadd groupname - Create group.
 
-Process Management
+Process Management -
 
+ps - Display running processes.
+ps -ef - Show all running processes.
+ps aux - Display detailed process list.
+top - Real-time process monitoring.
+htop - Interactive process viewer.
+pidof process - Show process ID.
+pgrep process - Find process by name.
+kill PID - Terminate process.
+kill -9 PID - Force kill process.
+pkill process - Kill by process name.
+jobs - Show background jobs.
+bg - Resume job in background.
+fg - Bring job to foreground.
+
+CPU & Memory -
+
+free -h - Display memory usage.
+vmstat - Show memory statistics.
+iostat - Display CPU and disk usage.
+sar - System activity report.
+uptime - Show system uptime and load.
+lscpu - Display CPU details.
+nproc - Number of CPUs.
+mpstat - CPU statistics.
+
+Disk & Storage -
+
+df -h - Disk space usage.
+du -sh directory - Directory size.
+lsblk - List block devices.
+blkid - Display UUIDs.
+fdisk -l - List disks.
+parted - Manage partitions.
+mount - Show mounted filesystems.
+umount /mountpoint - Unmount filesystem.
+mount /dev/sdb1 /mnt - Mount filesystem.
+fsck /dev/sda1 - Check filesystem.
+resize2fs device - Resize ext4 filesystem.
+xfs_growfs /mountpoint - Resize XFS filesystem.
+
+Networking -
+
+ip addr - Show IP addresses.
+ip link - Show interfaces.
+ip route - Show routing table.
+hostname - Display hostname.
+hostnamectl - Hostname information.
+ping host - Test connectivity.
+traceroute host - Trace network path.
+tracepath host - Trace network path.
+ss -tulpn - Show listening ports.
+netstat -tulpn - Show network connections.
+nslookup domain - DNS lookup.
+dig domain - DNS query.
+host domain - DNS lookup.
+curl URL - Fetch URL.
+wget URL - Download file.
+scp file user@host:/path - Secure copy.
+rsync -av source destination - Sync files.
+ssh user@host - Remote login.
+
+LVM Commands - 
+
+pvcreate - Create physical volume.
+vgcreate - Create volume group.
+lvcreate - Create logical volume.
+pvdisplay - Display physical volumes.
+vgdisplay - Display volume groups.
+lvdisplay - Display logical volumes.
+lvextend - Extend logical volume.
+lvreduce - Reduce logical volume.
+lvremove - Remove logical volume.
+
+Services - 
+
+systemctl status service - Service status.
+systemctl start service - Start service.
+systemctl stop service - Stop service.
+systemctl restart service - Restart service.
+systemctl enable service - Enable at boot.
+systemctl disable service - Disable at boot.
+journalctl - View system logs.
+journalctl -u service - Service logs.
+journalctl -f - Live logs.
 
 Q8. How to kill a process in Linux?
 
-Answer: 
+Answer: kill PID - Terminate process.
+kill -9 PID - Force kill process.
+pkill process - Kill by process name.
 
 Q9. What is inode?
 
-Answer:
+Answer: An inode is a data structure in Linux that stores metadata about a file, such as its permissions, owner, size, timestamps, and the location of its data blocks. It does not store the file name or the file content. Every file has a unique inode number, and we can view it using ls -i. If a filesystem runs out of inodes, new files cannot be created even if there is free disk space.
 
-Q10. 
+To check the inode usage - 
+df -i
+To display a file's inode number
+ls -i filename
+
+And if the file is deleted and no hard links remain, its inode becomes available for reuse.
+
+Q10. How to create a job in linux ?
+
+Answer: There are different types of jobs in Linux. For recurring tasks, I use cron by editing the crontab with "crontab -e". For one-time tasks, I use the "at" command. For long-running processes, I can run them in the background using "& or nohup" if they need to continue after I log out.
