@@ -1,2 +1,24 @@
 CICD Flow you use in your project - 
 
+Deployments via GitOps using Argo CD
+
+In our project, Argo CD is used for deployments to the OpenShift cluster. Unlike a traditional CI/CD pipeline where GitHub Actions or Jenkins deploys the application directly, our pipeline only builds the application, performs the required quality and security checks, builds the Docker image, and pushes it to the image registry.
+
+After that, the pipeline updates the Kubernetes/OpenShift deployment manifest with the new image version and commits the change to a separate Git repository, which we call the GitOps repository.
+
+Argo CD continuously monitors this GitOps repository. Whenever it detects a change in the deployment manifests, it automatically synchronizes those changes to the OpenShift cluster.
+
+Argo CD also continuously compares the desired state in Git with the actual state in the cluster. If someone makes a manual change directly in OpenShift, Argo CD detects that the application is out of sync and, depending on the configuration, either notifies the team or automatically restores the cluster to match what's defined in Git.
+
+This approach makes deployments more reliable because Git becomes the single source of truth, every deployment is tracked through Git commits, and rolling back is as simple as reverting a commit in the GitOps repository.
+
+
+Q1. Where your image build is happening, At which stage in this above CICD flow?
+
+Answer - The Docker image is built during the CI stage, typically by Jenkins or GitHub Actions. After the application is compiled and tested, the CI pipeline builds the container image and pushes it to the image registry.
+
+Q2. Lets say you have a deployment. And now you have to update a new image version into your existing deployment. How the entire process would be?
+
+Answer - The CI pipeline builds and pushes the new container image, then updates the image tag in the deployment manifest stored in the GitOps repository. Argo CD detects the Git commit and synchronizes the updated manifest to OpenShift. The Deployment controller notices the image change, creates a new ReplicaSet, and performs a rolling update by gradually replacing old pods with new ones.
+
+Q3. 
