@@ -164,3 +164,7 @@ And if the file is deleted and no hard links remain, its inode becomes available
 Q10. How to create a job in linux ?
 
 Answer: There are different types of jobs in Linux. For recurring tasks, I use cron by editing the crontab with "crontab -e". For one-time tasks, I use the "at" command. For long-running processes, I can run them in the background using "& or nohup" if they need to continue after I log out.
+
+Q11. How increase size of a file system in Linux system. Give command.
+
+Answer: 
