@@ -1,0 +1,48 @@
+Q1. What are all the applications you've migrated from IBM to Azure Cloud.
+
+Answer: We have migrated Compute, Network, Storage, IAM, Monitoring.
+In Compute, we migrated from Virtual Servers to Virtual Machines
+In Network, we have migrated from Virtual Private Cloud to Virtual Network
+In Storage, we migrated from IBM Cloud Storage Object to Azure Blob Storage
+In IAM, we migrated IBM Cloud IAM to Azure AD + IAM ROles
+In Monitoring, we migrated from IBM Log Analytics to Azure Monitor
+
+Q2. What exactly you do with 20+ resources which you've setup and managing.?
+
+Answer: We are managing our environment with multiple Azure Resources such as Virtual Machines, Virtual Network, Virtual Machine Scale Set, Network Security Groups, Storage Accounts, Identity and Access Management (IAM)
+Virtual Machines will provision with right size, attach OS Disks or Data Disks, Configure Availability Sets and Availability Zones, Apply NSGs.
+Virtual Network creates network with CIDR blocks, Isolates our Azure resources from Public Internet, Allows VMs and databases to communicate privately.
+Virtual Machine Scale Set acts as a HPA in OpenShift. It will automatically increases/decreases the VMs based on the spike. It has scale-out rule and scale-in rule. Scale-out rule helps increasing the VMs if the utilization limit exceeds. Scale-in rule helps decreasing the VMs if the VM is under utilized.
+Network Security Groups will control inbound and outbound traffic. It will also create inbound and outbound rules to allow/deny traffic based on source, destination, port, protocol(TCP/UDP/IP) and action(allow/deny).
+Storage Accounts which stores all the data and services together. It will also set access tiers and enables soft delete. In Azure, we have 5 storage accounts, Blob storage, Disk Storage, FIle Storage, Queue Storage, Table Storage.
+Identity and Access Management (IAM) is managing under Authentication and Authorization. Authentication will verify who you are and Authorization will decide what action you are allowed to do.
+
+Q3. Difference Between Public and Private Subnets.
+
+Answer: Public subnet is Open to Internet and has Public IPs. Some LB and Bastion Hosts lives here. Public Subnet is for web frontend.
+Private Subnet is isolated. Database and Services can communicate privately. VMs and Databases have private subnets.
+
+Q4. In Azure, Web application frontend is showing session timeout error. How would you troubleshoot.?
+Answer: First, I will acknowledge the issue. Then I'll go check pod logs in Datadog/Splunk, ath token expiry date, idle timeout settings, readiness and liveness probes, NSG Rules to find if there any return traffic bloackage, Test the connectivity, Verify TLS Cert expiration details.
+
+Q5. What are the Azure Container Apps.?
+Answer: Basically It runs containers on top of K8s, but we no need to manage the kubernetes API at all as the containers are serverless.
+It has serverless containers, built-in KEDA-based autoscaling. It will scale containers to zero when there is no traffic. It also has built-in Ingress and built-in LoadBalancing which automatically distributes incoming traffic.
+
+Q6. Deploy a new CICD Application in Azure.
+Answer: To deploy a new application, we can folow GitOps method.
+We will write a code and push it to Git. 
+Create Azure Subscription and Resource Group, Azure Container Registry to store Docker Images, Azure Key Vault to store secrets.
+Then create Pipeline for build and deploy the application, Run Unit Tests and Build Docker Image.
+Update the manifest with new image tag and commit the changes. 
+ArgoCD detects the change and sync it with desired state of Git. Alternatively, Azure DevOps will deploy directly using oc apply command
+Once the applciation is deployed, verify the pod, services, routes.
+And continue monitor the application using Azure Monitor., Azure Log Analytics.
+
+Q7. What are the Azure Services.?
+In Azure, we have Compute, Storage, Networking, IAM, Monitoring.
+Under Compute, we have Virtual Machines, Virtual Machine Scale Set, AKS, Azure Functions, Azure App Services.
+Under Storage, we have Blob storage, Disk Storage, FIle Storage, Queue Storage, Table Storage.
+Under Networking, we have Virtual Network(VNet), Network Security Groups(NSG), Load Balancer, VPN, DNS, Private Endpoints.
+Under IAM, we have Azure Active Directory, RBAC, Key Vault, Azure Policy.
+Under Monitoring, we have Azure Monitor, Log Analytics.
