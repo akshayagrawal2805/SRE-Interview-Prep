@@ -164,7 +164,7 @@ Q15. Explain the CI/CD flow of your project?
 Answer - Direct Deployments - 
 In my current project, the CI/CD pipeline is managed using GitHub Actions. The DevOps team creates the GitHub Actions workflow file, which gets triggered whenever there's a push or pull request to specific branches like main, develop, or feature branches, depending on the environment and deployment strategy.
 
-The workflow file mainly has three parts. First is the trigger section, where we define when the pipeline should start. Second is the runs-on section, where we specify which runner will execute the workflow, such as ubuntu-latest or a self-hosted runner. Third is the jobs section, where we define the different stages of the pipeline like checkout, build, SonarQube scan, security scans, Docker image build, image push to Harbor, and deployment to OpenShift.
+The workflow file mainly has three parts. First is the trigger section, where we define when the pipeline should start. Second is the runs-on section, where we specify which runner will execute the workflow, such as ubuntu-latest or a self-hosted runner. Third is the jobs section, where we define the different stages of the pipeline like checkout, build, SonarQube scan, security scans, Docker image build, image push to quay, and deployment to OpenShift.
 
 Deployments via GitOps using Argo CD
 
