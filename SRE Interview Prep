@@ -210,4 +210,4 @@ Step 6: Check Ephemeral Storage Usage - oc top pod - container storage or emptyD
 Step 7: Check for Large PVC Usage - oc get pvc
 Step 8: Verify Image Garbage Collection - journalctl -u kubelet
 
-Q20. 
+Q20. Difference in Metrics, logs and Traces?
