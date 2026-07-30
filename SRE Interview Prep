@@ -188,3 +188,26 @@ Status Code Range	  Meaning
 3xx	              Redirection
 4xx	              Client Error (problem with the request)
 5xx	              Server Error (problem on the server)
+
+Q17. can we setup something to make sure few pods out of desired always running without disruption.
+
+Answer - To ensure that a minimum number of pods remain available during planned maintenance or other voluntary disruptions, we configure a Pod Disruption Budget. For example, with four replicas we can set minAvailable: 2, ensuring Kubernetes won't voluntarily evict pods if doing so would reduce availability below two.
+
+Q18. What if all your pods are in same node? can it be possible?
+
+Answer - "Yes, it is possible if the scheduler places all replicas on the same node, especially in a small cluster or without scheduling constraints. To improve high availability, we typically use Pod Anti-Affinity or Topology Spread Constraints so replicas are distributed across different worker nodes. This ensures that if one node fails, all replicas are not lost."
+
+Q19. How you'll troubleshoot DiskPressure Issue?
+
+Answer - If I see a node in DiskPressure state, my first priority is to determine whether the issue is caused by container images, logs, ephemeral storage, or the underlying filesystem. I would investigate the node, identify what's consuming disk space, clean up safely, and verify that the node returns to a healthy state.
+
+Step 1: Confirm the Node Has DiskPressure - Describe Node and look for DiskPressure
+Step 2: Check Which Filesystem is Full - df -h and see which filesystem is full
+Step 3: Identify What's Consuming Space - du -xhd1 /
+Step 4: Check Container Images - crictl images
+Step 5: Check Container Logs - du -sh /var/log/containers
+Step 6: Check Ephemeral Storage Usage - oc top pod - container storage or emptyDir volumes, which can consume node disk space.
+Step 7: Check for Large PVC Usage - oc get pvc
+Step 8: Verify Image Garbage Collection - journalctl -u kubelet
+
+Q20. 
