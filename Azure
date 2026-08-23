@@ -23,7 +23,15 @@ Answer: Public subnet is Open to Internet and has Public IPs. Some LB and Bastio
 Private Subnet is isolated. Database and Services can communicate privately. VMs and Databases have private subnets.
 
 Q4. In Azure, Web application frontend is showing session timeout error. How would you troubleshoot.?
-Answer: First, I will acknowledge the issue. Then I'll go check pod logs in Datadog/Splunk, ath token expiry date, idle timeout settings, readiness and liveness probes, NSG Rules to find if there any return traffic bloackage, Test the connectivity, Verify TLS Cert expiration details.
+Answer: First, I will acknowledge the issue. 
+Then I'll go check 
+    pod logs in Datadog/Splunk, 
+    auth token expiry date, 
+    idle timeout settings, 
+    readiness and liveness probes, 
+    NSG Rules to find if there any return traffic bloackage, 
+Test the connectivity, 
+Verify TLS Cert expiration details.
 
 Q5. What are the Azure Container Apps.?
 Answer: Basically It runs containers on top of K8s, but we no need to manage the kubernetes API at all as the containers are serverless.
